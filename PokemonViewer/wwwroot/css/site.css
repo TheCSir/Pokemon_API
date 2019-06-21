@@ -1,0 +1,32 @@
+﻿.item-link {
+    color: black;
+    text-decoration: solid
+}
+
+.back-btn {
+    margin-bottom: 10px;
+}
+.item-link:hover {
+    background-color: #cdf9ff;
+    text-decoration: none;
+}
+
+.details-container {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.data-row {
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: larger;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: left;
+}
+
+.data-item { font-size: large; }
+
+.data-description { font-size: medium; }
+
+.first-data { border-right: 1px solid; }

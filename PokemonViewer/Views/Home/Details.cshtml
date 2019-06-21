@@ -7,39 +7,77 @@
 <div class="jumbotron text-center">
     <h1>Pokemon List</h1>
 </div>
+<div class="container">
+    <div class="row">
+        <a class="btn btn-outline-secondary offset-10 back-btn"
+           asp-controller="Home"
+           asp-action="Index">Go Back</a>
+    </div>
+
+</div>
 <div class="container single-ticket">
     <!-- Ticket details table -->
-    <div class="container text-center border border-secondary rounded m-0">
-        <div class="container row">
-            <div class="col-12">
-                <img src="@Model.Image"/>
+    <div class="text-center row ">
+        <div class="container col-7 border-dark border rounded">
+            <div class="row">
+                <div class="col details-container">
+                    <img class="rounded-circle border border-secondary" src="@Model.Image"/>
+                </div>
             </div>
-            <div class="col-12">@Model.Name</div>
+            <div class="row">
+                <div class="col details-container">
+                    <h3>@Model.Name</h3>
+                </div>
+            </div>
         </div>
-        <div class="container row m-2">
-            <div class="col-4 border border-secondary rounded m-0">XP : @Model.BaseExperience</div>
-            <div class="col-4 border border-secondary rounded m-0">Speed : @Model.StatSpeed</div>
-            <div class="col-4 border border-secondary rounded m-0">HP : @Model.StatHp</div>
-        </div>
-        <div class="container row m-2">
-            <div class="col-4 border border-secondary rounded m-0">Order : @Model.Order</div>
-            <div class="col-4 border border-secondary rounded m-0">Height : @Model.Height</div>
-            <div class="col-4 border border-secondary rounded m-0">Weight : @Model.Weight</div>
-        </div>
-        <div class="container row m-2">
-            <div class="col-6 border border-secondary rounded m-0">Attack : @Model.StatAttack</div>
-            <div class="col-6 border border-secondary rounded m-0">Special Attack : @Model.StatSpecialAttack</div>
-        </div>
-        <div class="container row m-2">
-            <div class="col-6 border border-secondary rounded m-0">Defence : @Model.StatDefence</div>
-            <div class="col-6 border border-secondary rounded m-0">Special Defence : @Model.StatSpecialDefence</div>
-        </div>
-        <div class="container row m-2">
-            <div class="col-12 border border-secondary rounded m-0">Types : 
-                @foreach (var type in Model.Types)
-                {
-                    @type
-                }
+        <div class="col-8 mx-auto">
+            <div class="row m-2 data-row">
+                <div class="col data-item first-data"><span class="font-weight-bold">Base Xp</span> : @Model.BaseExperience</div>
+                <div class="col "><span class="font-weight-bold">Hp</span> : @Model.StatHp</div>
+            </div>
+            <div class="row m-2 data-row">
+                <div class="col data-item first-data"><span class="font-weight-bold">Height</span> : @Model.Height ( Decimeters )</div>
+                <div class="col "><span class="font-weight-bold">Weight</span> : @Model.Weight (Hectograms) </div>
+            </div>
+            <div class="row m-2 data-row">
+                <div class="col data-item first-data"><span class="font-weight-bold">Speed</span> : @Model.StatSpeed</div>
+                <div class="col "><span class="font-weight-bold">Order of sorting</span> : @Model.Order</div>
+            </div>
+            <div class="row m-2 data-row">
+                <div class="col data-item first-data"><span class="font-weight-bold">Attack</span> : @Model.StatAttack</div>
+                <div class="col "><span class="font-weight-bold">Special Attack</span> : @Model.StatSpecialAttack</div>
+            </div>
+            <div class="row m-2 data-row">
+                <div class="col data-item first-data"><span class="font-weight-bold">Defence</span> : @Model.StatDefence</div>
+                <div class="col "><span class="font-weight-bold">Special Defence</span> : @Model.StatSpecialDefence</div>
+            </div>
+            <div class="row m-2 data-row text-center">
+                <div class="col">
+                    <span class="font-weight-bold">Abilities</span>
+                    @foreach (var ability in Model.Abilities)
+                    {
+                        @:<div class="col data-description">
+                        @ability.Key
+                        @: :
+                        @ability.Value
+                        @:</div>
+                    }
+                </div>
+            </div>
+            <div class="row m-2 data-row text-center">
+                <div class="col">
+                    <span class="font-weight-bold">Types</span>
+                    <div class="row">
+                        <div class="col-2"></div>
+                        @foreach (var type in Model.Types)
+                        {
+                            @:<div class="col border border-dark rounded m-2 data-description" style="background-color: @type.Value">
+                            @type.Key
+                            @:</div>
+                        }
+                        <div class="col-2"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

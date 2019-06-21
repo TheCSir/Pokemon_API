@@ -28,7 +28,9 @@ namespace PokemonViewer.Models
 
         public int StatHp { get; set; }
 
-        public List<string> Types { get; set; }
+        public Dictionary<string,string> Types { get; set; }
+
+        public Dictionary<string,string> Abilities { get; set; }
         public string Image { get; set; }
     }
 }
