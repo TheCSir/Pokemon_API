@@ -1,5 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Pokemon>
+
 @{
+
+    ViewBag.Title = "Pokemon List";
+}
+
+<div class="jumbotron text-center">
+    <h1>Pokemon List</h1>
+</div>
+
+@foreach (var pokemon in Model)
+{
+    <div class="container row border border-primary rounded m-2">
+        <div class="col-2 m-3">
+            <a class="btn btn-outline-primary"
+               asp-controller="Home"
+               asp-action="Details"
+               asp-route-id="@pokemon.Id">
+                <img src="@pokemon.Image" class="img-fluid"/>
+            </a>
+        </div>
+        <div class="col-9 m-3">
+            <h4 class="text-uppercase text-center">@pokemon.Name</h4>
+            <hr>
+            <div class="container row text-center">
+                <div class="col-4 text-success border border-secondary rounded m-0"><span class="font-weight-bold">HP</span> : @pokemon.StatHp</div>
+                <div class="col-4 border border-secondary rounded m-0"><span class="font-weight-bold text-secondary">Height</span> : @pokemon.Height</div>
+                <div class="col-4 border border-secondary rounded m-0"><span class="font-weight-bold text-secondary">Weight</span> : @pokemon.Weight</div>
+            </div>
+
+            <br>
+        </div>
+    </div>
 }

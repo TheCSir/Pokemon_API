@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using PokemonViewer.Models;
 
 namespace PokemonViewer
 {
@@ -24,6 +25,7 @@ namespace PokemonViewer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddTransient<IPokemonList, JsonPokemonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

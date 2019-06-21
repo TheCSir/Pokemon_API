@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Pokemon
+
 @{
+
+    ViewBag.Title = "Pokemon Details";
 }
+<div class="jumbotron text-center">
+    <h1>Pokemon List</h1>
+</div>
+<div class="container single-ticket">
+    <!-- Ticket details table -->
+    <div class="container text-center border border-secondary rounded m-0">
+        <div class="container row">
+            <div class="col-12">
+                <img src="@Model.Image"/>
+            </div>
+            <div class="col-12">@Model.Name</div>
+        </div>
+        <div class="container row m-2">
+            <div class="col-4 border border-secondary rounded m-0">XP : @Model.BaseExperience</div>
+            <div class="col-4 border border-secondary rounded m-0">Speed : @Model.StatSpeed</div>
+            <div class="col-4 border border-secondary rounded m-0">HP : @Model.StatHp</div>
+        </div>
+        <div class="container row m-2">
+            <div class="col-4 border border-secondary rounded m-0">Order : @Model.Order</div>
+            <div class="col-4 border border-secondary rounded m-0">Height : @Model.Height</div>
+            <div class="col-4 border border-secondary rounded m-0">Weight : @Model.Weight</div>
+        </div>
+        <div class="container row m-2">
+            <div class="col-6 border border-secondary rounded m-0">Attack : @Model.StatAttack</div>
+            <div class="col-6 border border-secondary rounded m-0">Special Attack : @Model.StatSpecialAttack</div>
+        </div>
+        <div class="container row m-2">
+            <div class="col-6 border border-secondary rounded m-0">Defence : @Model.StatDefence</div>
+            <div class="col-6 border border-secondary rounded m-0">Special Defence : @Model.StatSpecialDefence</div>
+        </div>
+        <div class="container row m-2">
+            <div class="col-12 border border-secondary rounded m-0">Types : 
+                @foreach (var type in Model.Types)
+                {
+                    @type
+                }
+            </div>
+        </div>
+    </div>
+</div>
