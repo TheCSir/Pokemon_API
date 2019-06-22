@@ -11,11 +11,13 @@
     <div class="row">
         <a class="btn btn-outline-secondary offset-10 back-btn"
            asp-controller="Home"
-           asp-action="Index">Go Back</a>
+           asp-action="Index">
+            Go Back
+        </a>
     </div>
 
 </div>
-<div class="container single-ticket">
+<div class="container">
     <!-- Ticket details table -->
     <div class="text-center row ">
         <div class="container col-7 border-dark border rounded">
@@ -56,9 +58,9 @@
                     <span class="font-weight-bold">Abilities</span>
                     @foreach (var ability in Model.Abilities)
                     {
-                        @:<div class="col data-description">
+                        @:<div class="col data-description"><span class="text-uppercase font-weight-bold">
                         @ability.Key
-                        @: :
+                        @:</span> :
                         @ability.Value
                         @:</div>
                     }

@@ -34,7 +34,7 @@ namespace PokemonViewer.Models
             Pokemon newPokemon = new Pokemon();
 
             Uri tempUri = new Uri("https://pokeapi.co/api/v2/pokemon/1/");
-            tempPokemonJson = (PokemonJson) await MapToObject.MapJsonToModel(tempUri);
+            tempPokemonJson = (PokemonJson) await MapToObject.MapJsonToModel(tempUri,tempPokemonJson);
             System.Diagnostics.Debug.WriteLine("--------------------------------------------------------");
             System.Diagnostics.Debug.WriteLine(tempPokemonJson.Types);
             mapData(newPokemon, tempPokemonJson);
@@ -148,25 +148,25 @@ namespace PokemonViewer.Models
             pokemon.Types = tempTypes;
 
             Dictionary<string,string> tempAbilityDictionary = new Dictionary<string, string>();
-            //foreach (var Ability in jPokemon.Abilities)
-            //{
-            //    Uri ablityUri = Ability.AbilityAbility.Url;
-            //    tempAbilityDictionary.Add(GetABilityTuple(ablityUri).Result.Item1, GetABilityTuple(ablityUri).Result.Item2);
-            //}
+            foreach (var Ability in jPokemon.Abilities)
+            {
+                Uri ablityUri = Ability.AbilityAbility.Url;
+                tempAbilityDictionary.Add(GetABilityTuple(ablityUri).Result.Item1, GetABilityTuple(ablityUri).Result.Item2);
+            }
 
             pokemon.Abilities=tempAbilityDictionary;
             return true;
         }
 
-        //public async Task<Tuple<string, string>> GetABilityTuple(Uri abliltyUri)
-        //{
-            
-        //    AbilityJson tempAbilityJson = (AbilityJson)await MapToObject.MapJsonToModel(abliltyUri);
-        //    string name = tempAbilityJson.Name;
-        //    String desc = tempAbilityJson.EffectEntries.First().ShortEffect;
+        public async Task<Tuple<string, string>> GetABilityTuple(Uri abliltyUri)
+        {
+            AbilityJson tempAbilityJson = new AbilityJson();
+            tempAbilityJson = (AbilityJson) await MapToObject.MapJsonToModel(abliltyUri, tempAbilityJson);
+            string name = tempAbilityJson.Name;
+            String desc = tempAbilityJson.EffectEntries.First().ShortEffect;
 
-        //    return Tuple.Create(name, desc);
+            return Tuple.Create(name, desc);
 
-        //}
+        }
     }
 }
