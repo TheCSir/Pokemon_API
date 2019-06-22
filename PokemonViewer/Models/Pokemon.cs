@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PokemonViewer.Models
 {
@@ -31,6 +32,6 @@ namespace PokemonViewer.Models
         public Dictionary<string,string> Types { get; set; }
 
         public Dictionary<string,string> Abilities { get; set; }
-        public string Image { get; set; }
+        public Uri Image { get; set; }
     }
 }

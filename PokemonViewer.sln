@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonViewer", "PokemonViewer\PokemonViewer.csproj", "{68AECAE8-CB9D-404B-891A-259B714C2361}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpHelpers", "HttpHelpers\HttpHelpers.csproj", "{07D926BC-3DF5-4DE7-BDBD-F9A3FF8507CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonViewer.ModelHelpers", "PokemonViewer.ModelHelpers\PokemonViewer.ModelHelpers.csproj", "{B5271332-08CF-40AB-ADD8-7947A75F8829}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{68AECAE8-CB9D-404B-891A-259B714C2361}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68AECAE8-CB9D-404B-891A-259B714C2361}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68AECAE8-CB9D-404B-891A-259B714C2361}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07D926BC-3DF5-4DE7-BDBD-F9A3FF8507CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07D926BC-3DF5-4DE7-BDBD-F9A3FF8507CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07D926BC-3DF5-4DE7-BDBD-F9A3FF8507CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07D926BC-3DF5-4DE7-BDBD-F9A3FF8507CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5271332-08CF-40AB-ADD8-7947A75F8829}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5271332-08CF-40AB-ADD8-7947A75F8829}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5271332-08CF-40AB-ADD8-7947A75F8829}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5271332-08CF-40AB-ADD8-7947A75F8829}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
