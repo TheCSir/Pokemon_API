@@ -25,7 +25,8 @@ namespace PokemonViewer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddTransient<IPokemonList, JsonPokemonRepository>();
+            services.AddResponseCompression();
+            services.AddSingleton<IPokemonList, JsonPokemonRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

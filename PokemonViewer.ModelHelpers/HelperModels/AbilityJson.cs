@@ -12,8 +12,6 @@ namespace PokemonViewer.ModelHelpers.HelperModels
         [JsonProperty("effect_entries")]
         public List<EffectEntry> EffectEntries { get; set; }
 
-        [JsonProperty("flavor_text_entries")]
-        public List<FlavorTextEntry> FlavorTextEntries { get; set; }
 
         [JsonProperty("generation")]
         public Generation Generation { get; set; }
@@ -26,12 +24,7 @@ namespace PokemonViewer.ModelHelpers.HelperModels
 
         [JsonProperty("name")]
         public string Name { get; set; }
-
-        [JsonProperty("names")]
-        public List<Name> Names { get; set; }
-
-        [JsonProperty("pokemon")]
-        public List<Pokemon> Pokemon { get; set; }
+        
     }
 
     public partial class EffectEntry
@@ -53,39 +46,6 @@ namespace PokemonViewer.ModelHelpers.HelperModels
 
         [JsonProperty("url")]
         public Uri Url { get; set; }
-    }
-
-    public partial class FlavorTextEntry
-    {
-        [JsonProperty("flavor_text")]
-        public string FlavorText { get; set; }
-
-        [JsonProperty("language")]
-        public Generation Language { get; set; }
-
-        [JsonProperty("version_group")]
-        public Generation VersionGroup { get; set; }
-    }
-
-    public partial class Name
-    {
-        [JsonProperty("language")]
-        public Generation Language { get; set; }
-
-        [JsonProperty("name")]
-        public string NameName { get; set; }
-    }
-
-    public partial class Pokemon
-    {
-        [JsonProperty("is_hidden")]
-        public bool IsHidden { get; set; }
-
-        [JsonProperty("pokemon")]
-        public Generation PokemonPokemon { get; set; }
-
-        [JsonProperty("slot")]
-        public long Slot { get; set; }
     }
 }
 

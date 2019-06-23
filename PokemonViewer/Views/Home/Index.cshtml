@@ -8,6 +8,15 @@
 <div class="jumbotron text-center">
     <h1>Pokemon List</h1>
 </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
 
 @foreach (var pokemon in Model)
 {
@@ -16,7 +25,7 @@
        asp-route-id="@pokemon.Id">
         <div class="row border border-primary rounded m-2 item-link">
             <div class="col m-3">
-                <img src="@pokemon.Image" class="img-thumbnail" />
+                @*<img src="@pokemon.Image" class="img-thumbnail" />*@
             </div>
             <div class="col-9 m-3">
                 <h4 class="text-uppercase text-center">@pokemon.Name</h4>

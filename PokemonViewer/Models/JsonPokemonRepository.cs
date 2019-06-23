@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using PokemonViewer.ModelHelpers.HelperModels;
 using PokemonViewer.ModelHelpers.HelperFunctions;
+using PokemonViewer.ModelHelpers.HelperModels;
 
 namespace PokemonViewer.Models
 {
     public class JsonPokemonRepository : IPokemonList
     {
         private List<Pokemon> _pokemonList;
-
-        public JsonPokemonRepository()
-        {
-            _pokemonList = new List<Pokemon>();
-            _pokemonList.Add(GenataPokemonAsync().Result);
-        }
 
         public IEnumerable<Pokemon> GetAllPokemon()
         {
@@ -28,22 +21,44 @@ namespace PokemonViewer.Models
             return _pokemonList.FirstOrDefault(p => p.Id == id);
         }
 
-        public async Task<Pokemon> GenataPokemonAsync()
+        public void SetPokemonPortion(int size)
         {
-            PokemonJson tempPokemonJson = new PokemonJson();
-            Pokemon newPokemon = new Pokemon();
+            _pokemonList = new List<Pokemon>();
+            List<Uri> pokemonUriList = GetPokemonUri(size).Result;
+            foreach (var uri in pokemonUriList)
+            {
+                _pokemonList.Add(GeneratePokemon(uri).Result);
+            }
 
-            Uri tempUri = new Uri("https://pokeapi.co/api/v2/pokemon/1/");
-            tempPokemonJson = (PokemonJson) await MapToObject.MapJsonToModel(tempUri,tempPokemonJson);
-            System.Diagnostics.Debug.WriteLine("--------------------------------------------------------");
-            System.Diagnostics.Debug.WriteLine(tempPokemonJson.Types);
-            mapData(newPokemon, tempPokemonJson);
-            System.Diagnostics.Debug.WriteLine("--------------------------------------------------------");
-            System.Diagnostics.Debug.WriteLine(newPokemon.Types);
+        }
+
+        public async Task<List<Uri>> GetPokemonUri(int i)
+        {
+            var newPokemonList = new PokemonListJson();
+            var tempUri = new Uri("https://pokeapi.co/api/v2/pokemon?offset="+i+"&limit=20");
+            List<Uri> uriList = new List<Uri>();
+
+            newPokemonList = (PokemonListJson)await MapToObject.MapJsonToModel(tempUri, newPokemonList);
+
+            foreach (var result in newPokemonList.Results)
+            {
+                uriList.Add(result.Url);
+            }
+
+            return uriList;
+        }
+
+        public async Task<Pokemon> GeneratePokemon(Uri pokemonUri)
+        {
+            var tempPokemonJson = new PokemonJson();
+            var newPokemon = new Pokemon();
+            
+            tempPokemonJson = (PokemonJson) await MapToObject.MapJsonToModel(pokemonUri, tempPokemonJson);
+            MapModels(newPokemon, tempPokemonJson);
             return newPokemon;
         }
 
-        public Boolean mapData(Pokemon pokemon, PokemonJson jPokemon)
+        public bool MapModels(Pokemon pokemon, PokemonJson jPokemon)
         {
             pokemon.Id = jPokemon.Id;
             pokemon.Name = jPokemon.Name;
@@ -51,9 +66,39 @@ namespace PokemonViewer.Models
             pokemon.Height = jPokemon.Height;
             pokemon.Order = jPokemon.Order;
             pokemon.BaseExperience = jPokemon.BaseExperience;
+            MapStats(pokemon, jPokemon);
+            pokemon.Image = jPokemon.Sprites.FrontDefault;
+            pokemon.Types = MapTypes(jPokemon);
+            pokemon.Abilities = MapAbility(jPokemon);
+            return true;
+        }
 
-            foreach (var stat in jPokemon.Stats)
+        public Dictionary<string, string> MapAbility(PokemonJson jPokemon)
+        {
+            var tempAbilityDictionary = new Dictionary<string, string>();
+            foreach (var ability in jPokemon.Abilities)
             {
+                var abilityUri = ability.AbilityAbility.Url;
+                tempAbilityDictionary.Add(GetAbilityTuple(abilityUri).Result.Item1,
+                    GetAbilityTuple(abilityUri).Result.Item2);
+            }
+
+            return tempAbilityDictionary;
+        }
+
+        public async Task<Tuple<string, string>> GetAbilityTuple(Uri abilityUri)
+        {
+            var tempAbilityJson = new AbilityJson();
+            tempAbilityJson = (AbilityJson) await MapToObject.MapJsonToModel(abilityUri, tempAbilityJson);
+            var name = tempAbilityJson.Name;
+            var desc = tempAbilityJson.EffectEntries.First().ShortEffect;
+
+            return Tuple.Create(name, desc);
+        }
+
+        public void MapStats(Pokemon pokemon, PokemonJson jPokemon)
+        {
+            foreach (var stat in jPokemon.Stats)
                 switch (stat.StatStat.Name)
                 {
                     case "speed":
@@ -75,14 +120,13 @@ namespace PokemonViewer.Models
                         pokemon.StatHp = stat.BaseStat;
                         break;
                 }
-            }
+        }
 
-            pokemon.Image = jPokemon.Sprites.FrontDefault;
-
-            Dictionary<string, string> tempTypes = new Dictionary<string, string>();
+        public Dictionary<string, string> MapTypes(PokemonJson jPokemon)
+        {
+            var tempTypes = new Dictionary<string, string>();
 
             foreach (var types in jPokemon.Types)
-            {
                 switch (types.Type.Name)
                 {
                     case "normal":
@@ -143,30 +187,8 @@ namespace PokemonViewer.Models
                         tempTypes.Add("Unspecified", "#68a090");
                         break;
                 }
-            }
 
-            pokemon.Types = tempTypes;
-
-            Dictionary<string,string> tempAbilityDictionary = new Dictionary<string, string>();
-            foreach (var Ability in jPokemon.Abilities)
-            {
-                Uri ablityUri = Ability.AbilityAbility.Url;
-                tempAbilityDictionary.Add(GetABilityTuple(ablityUri).Result.Item1, GetABilityTuple(ablityUri).Result.Item2);
-            }
-
-            pokemon.Abilities=tempAbilityDictionary;
-            return true;
-        }
-
-        public async Task<Tuple<string, string>> GetABilityTuple(Uri abliltyUri)
-        {
-            AbilityJson tempAbilityJson = new AbilityJson();
-            tempAbilityJson = (AbilityJson) await MapToObject.MapJsonToModel(abliltyUri, tempAbilityJson);
-            string name = tempAbilityJson.Name;
-            String desc = tempAbilityJson.EffectEntries.First().ShortEffect;
-
-            return Tuple.Create(name, desc);
-
+            return tempTypes;
         }
     }
 }

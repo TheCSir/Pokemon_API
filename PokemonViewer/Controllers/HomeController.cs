@@ -15,9 +15,11 @@ namespace PokemonViewer.Controllers
         {
             _pokemonList = pokemonList;
         }
-        public IActionResult Index()
+        public IActionResult Index(int? id)
         {
+            _pokemonList.SetPokemonPortion(id??1);
             var model = _pokemonList.GetAllPokemon();
+            
             return View(model);
         }
 

@@ -10,5 +10,7 @@ namespace PokemonViewer.Models
         Pokemon GetPokemon(int id);
 
         IEnumerable<Pokemon> GetAllPokemon();
+
+        void SetPokemonPortion(int size);
     }
 }

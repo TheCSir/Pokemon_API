@@ -15,8 +15,6 @@ namespace PokemonViewer.ModelHelpers.HelperModels
         [JsonProperty("forms")]
         public List<Species> Forms { get; set; }
 
-        [JsonProperty("game_indices")]
-        public List<GameIndex> GameIndices { get; set; }
 
         [JsonProperty("height")]
         public int Height { get; set; }
@@ -32,9 +30,6 @@ namespace PokemonViewer.ModelHelpers.HelperModels
 
         [JsonProperty("location_area_encounters")]
         public Uri LocationAreaEncounters { get; set; }
-
-        [JsonProperty("moves")]
-        public List<Move> Moves { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
@@ -77,24 +72,6 @@ namespace PokemonViewer.ModelHelpers.HelperModels
 
         [JsonProperty("url")]
         public Uri Url { get; set; }
-    }
-
-    public partial class GameIndex
-    {
-        [JsonProperty("game_index")]
-        public int GameIndexGameIndex { get; set; }
-
-        [JsonProperty("version")]
-        public Species Version { get; set; }
-    }
-
-    public partial class Move
-    {
-        [JsonProperty("move")]
-        public Species MoveMove { get; set; }
-
-        [JsonProperty("version_group_details")]
-        public List<VersionGroupDetail> VersionGroupDetails { get; set; }
     }
 
     public partial class VersionGroupDetail

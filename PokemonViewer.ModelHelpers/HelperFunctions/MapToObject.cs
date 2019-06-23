@@ -16,6 +16,8 @@ namespace PokemonViewer.ModelHelpers.HelperFunctions
                 inputModel = JsonConvert.DeserializeObject<PokemonJson>(await response.Content.ReadAsStringAsync());
             else if (inputModel.GetType() == typeof(AbilityJson))
                 inputModel = JsonConvert.DeserializeObject<AbilityJson>(await response.Content.ReadAsStringAsync());
+            else if (inputModel.GetType() == typeof(PokemonListJson))
+                inputModel = JsonConvert.DeserializeObject<PokemonListJson>(await response.Content.ReadAsStringAsync());
 
             return inputModel;
         }
