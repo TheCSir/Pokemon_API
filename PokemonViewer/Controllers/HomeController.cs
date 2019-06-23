@@ -16,7 +16,7 @@ namespace PokemonViewer.Controllers
 
         public IActionResult Index(int? id)
         {
-            _simplifiedPokemon.GetPokemons();
+            _simplifiedPokemon.SetPokemons(id??1);
             var model = _simplifiedPokemon.GetPokemons();
 
             return View(model);
@@ -26,7 +26,7 @@ namespace PokemonViewer.Controllers
         {
             _pokemon.SetPokemon(id);
             var model = _pokemon.GetPokemon();
-            return View();
+            return View(model);
         }
     }
 }

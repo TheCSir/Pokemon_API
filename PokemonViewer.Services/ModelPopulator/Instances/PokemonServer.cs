@@ -20,8 +20,6 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
 
             tempPokemonJson = (PokemonJson)MapToObject.MapJsonToModel(uri, tempPokemonJson);
             _pokemonModel = MapModels(tempPokemonJson);
-            //System.Diagnostics.Debug.WriteLine("===================NEW==========================");
-            //System.Diagnostics.Debug.WriteLine(_pokemonModel.Image);
         }
 
         public Pokemon GetPokemon()
@@ -31,11 +29,9 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
 
         public Pokemon MapModels(PokemonJson jPokemon)
         {
-            Pokemon pokemon = new Pokemon();
+            Pokemon pokemon = new Pokemon {Id = jPokemon.Id, Name = jPokemon.Name};
 
-            pokemon.Id = jPokemon.Id;
-            pokemon.Name = jPokemon.Name;
-            
+
             if (pokemon.Name == null)
                 return null;
 
