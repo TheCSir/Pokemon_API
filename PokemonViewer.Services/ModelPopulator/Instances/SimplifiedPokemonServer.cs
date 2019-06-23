@@ -10,10 +10,11 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
 {
     public class SimplifiedPokemonServer : ISimplifiedPokemonServer
     {
-        private List<SimplifiedPokemon> _pokemonListModel;
+        private List<SimplifiedPokemon> _pokemonListModel = new List<SimplifiedPokemon>();
 
         public List<SimplifiedPokemon> GetPokemons()
         {
+            
             return _pokemonListModel;
         }
 
@@ -23,7 +24,7 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
             var newPokemonList = new PokemonListJson();
             List<Uri> uriList = new List<Uri>();
 
-            Uri uri = new Uri("https://pokeapi.co/api/v2/pokemon?offset=" + offset + "&limit=20");
+            Uri uri = new Uri("https://pokeapi.co/api/v2/pokemon?offset=" + offset + "&limit=10");
 
 
             newPokemonList = (PokemonListJson)MapToObject.MapJsonToModel(uri, newPokemonList);
@@ -53,10 +54,8 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
 
         public SimplifiedPokemon MapModels(SimplifiedPokemonJson jPokemon)
         {
-            SimplifiedPokemon temPokemon = new SimplifiedPokemon();
+            SimplifiedPokemon temPokemon = new SimplifiedPokemon {Id = jPokemon.Id, Name = jPokemon.Name};
 
-            temPokemon.Id = jPokemon.Id;
-            temPokemon.Name = jPokemon.Name;
 
             if (temPokemon.Name == null)
                 return null;
