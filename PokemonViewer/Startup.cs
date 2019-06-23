@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PokemonViewer.Repository;
+using PokemonViewer.Services.ModelPopulator.Instances;
+using PokemonViewer.Services.ModelPopulators.Interfaces;
+
 
 namespace PokemonViewer
 {
@@ -27,7 +23,8 @@ namespace PokemonViewer
         {
             services.AddMvc();
             services.AddResponseCompression();
-            services.AddSingleton<IRepository, PokemonList>();
+            services.AddScoped<IPokemonServer, PokemonServer>();
+            services.AddScoped<ISimplifiedPokemonServer, SimplifiedPokemonServer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,8 +46,8 @@ namespace PokemonViewer
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

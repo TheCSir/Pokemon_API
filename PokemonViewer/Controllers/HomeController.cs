@@ -1,33 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using PokemonViewer.Domain.Models;
-using PokemonViewer.Repository;
+﻿using Microsoft.AspNetCore.Mvc;
+using PokemonViewer.Services.ModelPopulators.Interfaces;
 
 namespace PokemonViewer.Controllers
 {
     public class HomeController : Controller
     {
-        private IRepository _pokmonList;
+        private IPokemonServer _pokemon;
+        private ISimplifiedPokemonServer _simplifiedPokemon;
 
-        public HomeController(IRepository pokemonList)
+        public HomeController(IPokemonServer pokemonServer, ISimplifiedPokemonServer simplifiedPokemonServer)
         {
-            _pokmonList = pokemonList;
+            _pokemon = pokemonServer;
+            _simplifiedPokemon = simplifiedPokemonServer;
         }
+
         public IActionResult Index(int? id)
         {
-            _pokmonList.SetList(id??1);
-            var model = _pokmonList.GetAll();
-            
+            _simplifiedPokemon.GetPokemons();
+            var model = _simplifiedPokemon.GetPokemons();
+
             return View(model);
         }
 
         public IActionResult Details(int id)
         {
-            var model = _pokmonList.GetSelected(id);
-            return View(model);
+            _pokemon.SetPokemon(id);
+            var model = _pokemon.GetPokemon();
+            return View();
         }
     }
 }

@@ -12,33 +12,20 @@ namespace PokemonViewer.ModelHelpers.HelperModels
         [JsonProperty("base_experience")]
         public int BaseExperience { get; set; }
 
-        [JsonProperty("forms")]
-        public List<Species> Forms { get; set; }
-
 
         [JsonProperty("height")]
         public int Height { get; set; }
 
-        [JsonProperty("held_items")]
-        public List<object> HeldItems { get; set; }
 
         [JsonProperty("id")]
         public int Id { get; set; }
 
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
-
-        [JsonProperty("location_area_encounters")]
-        public Uri LocationAreaEncounters { get; set; }
 
         [JsonProperty("name")]
         public string Name { get; set; }
 
         [JsonProperty("order")]
         public int Order { get; set; }
-
-        [JsonProperty("species")]
-        public Species Species { get; set; }
 
         [JsonProperty("sprites")]
         public Sprites Sprites { get; set; }
@@ -72,18 +59,6 @@ namespace PokemonViewer.ModelHelpers.HelperModels
 
         [JsonProperty("url")]
         public Uri Url { get; set; }
-    }
-
-    public partial class VersionGroupDetail
-    {
-        [JsonProperty("level_learned_at")]
-        public int LevelLearnedAt { get; set; }
-
-        [JsonProperty("move_learn_method")]
-        public Species MoveLearnMethod { get; set; }
-
-        [JsonProperty("version_group")]
-        public Species VersionGroup { get; set; }
     }
 
     public partial class Sprites

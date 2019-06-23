@@ -8,7 +8,7 @@ namespace PokemonViewer.Domain.Models
         public int Id { get; set; }
 
         public string Name { get; set; }
-        
+
         public int BaseExperience { get; set; }
 
         public int Height { get; set; }
@@ -29,9 +29,9 @@ namespace PokemonViewer.Domain.Models
 
         public int StatHp { get; set; }
 
-        public Dictionary<string,string> Types { get; set; }
+        public Dictionary<string, string> Types { get; set; }
 
-        public Dictionary<string,string> Abilities { get; set; }
+        public Dictionary<string, string> Abilities { get; set; }
         public Uri Image { get; set; }
     }
 }

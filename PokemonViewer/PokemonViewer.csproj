@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PokemonViewer.ModelHelpers\PokemonViewer.ModelHelpers.csproj" />
-    <ProjectReference Include="..\PokemonViewer.Repository\PokemonViewer.Repository.csproj" />
-    <ProjectReference Include="..\PokemonViewer.Services\PokemonViewer.Domain.csproj" />
+    <ProjectReference Include="..\PokemonViewer.Services\PokemonViewer.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>
