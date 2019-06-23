@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HttpHelpers", "HttpHelpers\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonViewer.ModelHelpers", "PokemonViewer.ModelHelpers\PokemonViewer.ModelHelpers.csproj", "{B5271332-08CF-40AB-ADD8-7947A75F8829}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonViewer.Services", "PokemonViewer.Services\PokemonViewer.Services.csproj", "{E98BB31E-F599-491F-AB1C-55129B57CB88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonViewer.Domain", "PokemonViewer.Services\PokemonViewer.Domain.csproj", "{E98BB31E-F599-491F-AB1C-55129B57CB88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonViewer.Repository", "PokemonViewer.Repository\PokemonViewer.Repository.csproj", "{4C7E75B3-C40F-46A5-950C-3D1A8AFAA94D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E98BB31E-F599-491F-AB1C-55129B57CB88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E98BB31E-F599-491F-AB1C-55129B57CB88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E98BB31E-F599-491F-AB1C-55129B57CB88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C7E75B3-C40F-46A5-950C-3D1A8AFAA94D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C7E75B3-C40F-46A5-950C-3D1A8AFAA94D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C7E75B3-C40F-46A5-950C-3D1A8AFAA94D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C7E75B3-C40F-46A5-950C-3D1A8AFAA94D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

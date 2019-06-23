@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PokemonViewer.Models;
+using PokemonViewer.Domain.Models;
+using PokemonViewer.Repository;
 
 namespace PokemonViewer.Controllers
 {
     public class HomeController : Controller
     {
-        private IPokemonList _pokemonList;
+        private IRepository _pokmonList;
 
-        public HomeController(IPokemonList pokemonList)
+        public HomeController(IRepository pokemonList)
         {
-            _pokemonList = pokemonList;
+            _pokmonList = pokemonList;
         }
         public IActionResult Index(int? id)
         {
-            _pokemonList.SetPokemonPortion(id??1);
-            var model = _pokemonList.GetAllPokemon();
+            _pokmonList.SetList(id??1);
+            var model = _pokmonList.GetAll();
             
             return View(model);
         }
 
         public IActionResult Details(int id)
         {
-            var model = _pokemonList.GetPokemon(id);
+            var model = _pokmonList.GetSelected(id);
             return View(model);
         }
     }

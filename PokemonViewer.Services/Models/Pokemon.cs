@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PokemonViewer.Models
+namespace PokemonViewer.Domain.Models
 {
     public class Pokemon
     {
