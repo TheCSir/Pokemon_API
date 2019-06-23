@@ -8,14 +8,14 @@ namespace HttpHelpers.ResponceServices
 {
     public static class GetResponce
     {
-        public static async Task<HttpResponseMessage> GetResponseString(Uri inputUri)
+        public static HttpResponseMessage GetResponseString(Uri inputUri)
         {
             using (var httpClient = new HttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "C# App");
                 try
                 {
-                    var response = await httpClient.GetAsync(inputUri);
+                    var response = httpClient.GetAsync(inputUri).Result;
                     response.EnsureSuccessStatusCode();
                     return response;
                 }

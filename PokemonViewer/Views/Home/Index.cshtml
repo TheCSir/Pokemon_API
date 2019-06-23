@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Pokemon>
+﻿@model List<PokemonViewer.Domain.Models.SimplifiedPokemon>
 
 @{
 
@@ -33,7 +33,7 @@
                 <div class="row text-center border rounded border-dark">
                     <div class="col border-right border-dark"><span class="font-weight-bold">ID</span> : @pokemon.Id</div>
                     <div class="col "><span class="font-weight-bold text-secondary">Order Of Sorting</span> : @pokemon.Order</div>
-                    <div class="col border-left border-dark"><span class="font-weight-bold text-secondary">Base XP</span> : @pokemon.BaseExperience</div>
+                    <div class="col border-left border-dark"><span class="font-weight-bold text-secondary">Base XP</span> : @pokemon.Order</div>
                 </div>
 
                 <br>

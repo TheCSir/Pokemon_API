@@ -21,9 +21,6 @@ namespace PokemonViewer.ModelHelpers.HelperModels
 
     public partial class Result
     {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
         [JsonProperty("url")]
         public Uri Url { get; set; }
     }

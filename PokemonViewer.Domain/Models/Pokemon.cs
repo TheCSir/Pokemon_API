@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace PokemonViewer.Models
+namespace PokemonViewer.Domain.Models
 {
     public class Pokemon
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-        
+
         public int BaseExperience { get; set; }
 
         public int Height { get; set; }
@@ -29,9 +29,9 @@ namespace PokemonViewer.Models
 
         public int StatHp { get; set; }
 
-        public Dictionary<string,string> Types { get; set; }
+        public Dictionary<string, string> Types { get; set; }
 
-        public Dictionary<string,string> Abilities { get; set; }
+        public Dictionary<string, string> Abilities { get; set; }
         public Uri Image { get; set; }
     }
 }
