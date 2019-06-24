@@ -1,25 +1,21 @@
-﻿
-
-.item-link {
+﻿.item-link {
     color: black;
     text-decoration: solid
 }
 
-.back-btn {
-    margin-bottom: 10px;
-}
+.back-btn { margin-bottom: 10px; }
+
 .item-link:hover {
     background-color: #cdf9ff;
     text-decoration: none;
 }
 
-.details-container{
+.details-container {
     padding-bottom: 20px;
     padding-top: 20px;
 }
-.details-container-type {
-    padding-bottom: 20px;
-}
+
+.details-container-type { padding-bottom: 20px; }
 
 .data-row {
     font-size: larger;
@@ -32,10 +28,7 @@
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
-    .data-item {
-        text-align: center;
-    }
+    .data-item { text-align: center; }
 }
 
 .data-description { font-size: medium; }
-

@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace PokemonViewer.ModelHelpers.HelperModels
 {
-    public partial class AbilityJson : IHelperModel
+    public partial class AbilityJson : HelperModel
     {
 
         [JsonProperty("effect_entries")] public List<EffectEntry> EffectEntries { get; set; }

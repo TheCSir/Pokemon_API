@@ -1,19 +1,18 @@
-﻿using System;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using PokemonViewer.Services.ModelPopulator.Instances;
-using PokemonViewer.Services.ModelPopulators.Interfaces;
+using PokemonViewer.Services.ModelPopulator.Interfaces;
 
 namespace PokemonViewer.Controllers
 {
     public class HomeController : Controller
     {
+        private const int DefaultSize = 10;
+        private readonly IConfiguration _configuration;
         private readonly IPokemonServer _pokemon;
         private readonly ISimplifiedPokemonServer _simplifiedPokemon;
-        private readonly IConfiguration _configuration;
-        private const int DefaultSize = 10;
 
-        public HomeController(IPokemonServer pokemonServer, ISimplifiedPokemonServer simplifiedPokemonServer, IConfiguration configuration)
+        public HomeController(IPokemonServer pokemonServer, ISimplifiedPokemonServer simplifiedPokemonServer,
+            IConfiguration configuration)
         {
             _configuration = configuration;
             _pokemon = pokemonServer;
@@ -30,8 +29,9 @@ namespace PokemonViewer.Controllers
             var currentOffset = currentIndex * currentResultSize;
 
             _simplifiedPokemon.SetPokemons(currentOffset, currentResultSize);
-            
-            if (_simplifiedPokemon.GetTotal() != 0 && currentIndex >= 0 && currentIndex <= CalcMaxPage(_simplifiedPokemon.GetTotal()))
+
+            if (_simplifiedPokemon.GetTotal() != 0 && currentIndex >= 0 &&
+                currentIndex <= CalcMaxPage(_simplifiedPokemon.GetTotal()))
             {
                 var model = _simplifiedPokemon.GetPokemons();
                 ViewBag.ActivePage = currentIndex;
@@ -39,23 +39,20 @@ namespace PokemonViewer.Controllers
                 ViewBag.IsPrevious = currentIndex > 0;
                 return View(model);
             }
-            else if (_simplifiedPokemon.GetTotal() == 0)
-            {
-                return View("Error");
-            }
-            else
-            {
-                ViewBag.ErrorMessage = "Can't seem to find pokemons you are looking for";
-                return View("ServerError");
-            }
+
+            if (_simplifiedPokemon.GetTotal() == 0) return View("Error");
+
+            ViewBag.ErrorMessage = "Can't seem to find pokemons you are looking for";
+            return View("ServerError");
 
             bool CalcIsNext()
             {
                 return currentIndex != CalcMaxPage(_simplifiedPokemon.GetTotal());
             }
+
             int CalcMaxPage(int total)
             {
-                int maxIndex = total / currentResultSize;
+                var maxIndex = total / currentResultSize;
 
                 return total % maxIndex != 0 ? maxIndex : maxIndex - 1;
             }
@@ -69,11 +66,9 @@ namespace PokemonViewer.Controllers
                 var model = _pokemon.GetPokemon();
                 return View(model);
             }
-            else
-            {
-                ViewBag.ErrorMessage = "Can't seem to find the pokemon you are looking for";
-                return View("ServerError");
-            }
+
+            ViewBag.ErrorMessage = "Can't seem to find the pokemon you are looking for";
+            return View("ServerError");
         }
     }
 }

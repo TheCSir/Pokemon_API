@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using PokemonViewer.Domain.Models;
 
-namespace PokemonViewer.Services.ModelPopulators.Interfaces
+namespace PokemonViewer.Services.ModelPopulator.Interfaces
 {
     public interface ISimplifiedPokemonServer
     {

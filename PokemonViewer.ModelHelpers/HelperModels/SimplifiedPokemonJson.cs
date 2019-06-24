@@ -1,9 +1,8 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace PokemonViewer.ModelHelpers.HelperModels
 {
-    public class SimplifiedPokemonJson : IHelperModel
+    public class SimplifiedPokemonJson : HelperModel
     {
         [JsonProperty("id")] public int Id { get; set; }
 

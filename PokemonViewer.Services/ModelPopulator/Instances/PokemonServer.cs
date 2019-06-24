@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using PokemonViewer.Domain.Models;
 using PokemonViewer.ModelHelpers.HelperFunctions;
 using PokemonViewer.ModelHelpers.HelperModels;
-using PokemonViewer.Services.ModelPopulators.Interfaces;
+using PokemonViewer.Services.ModelPopulator.Interfaces;
 
 namespace PokemonViewer.Services.ModelPopulator.Instances
 {
-    public class PokemonServer: IPokemonServer
+    public class PokemonServer : IPokemonServer
     {
         private Pokemon _pokemonModel;
 
         public void SetPokemon(int id)
         {
             var tempPokemonJson = new PokemonJson();
-            Uri uri = new Uri("https://pokeapi.co/api/v2/pokemon/"+id+"/");
+            var uri = new Uri("https://pokeapi.co/api/v2/pokemon/" + id + "/");
 
-            tempPokemonJson = (PokemonJson)MapToObject.MapJsonToModel(uri, tempPokemonJson);
+            tempPokemonJson = (PokemonJson) MapToObject.MapJsonToModel(uri, tempPokemonJson);
             _pokemonModel = MapModels(tempPokemonJson);
         }
 
@@ -31,7 +30,7 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
         {
             if (jPokemon == null)
                 return null;
-            Pokemon pokemon = new Pokemon
+            var pokemon = new Pokemon
             {
                 Id = jPokemon.Id,
                 Name = jPokemon.Name,
@@ -65,7 +64,7 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
         public Tuple<string, string> GetAbilityTuple(Uri abilityUri)
         {
             var tempAbilityJson = new AbilityJson();
-            tempAbilityJson = (AbilityJson)MapToObject.MapJsonToModel(abilityUri, tempAbilityJson);
+            tempAbilityJson = (AbilityJson) MapToObject.MapJsonToModel(abilityUri, tempAbilityJson);
             var name = tempAbilityJson.Name;
             var desc = tempAbilityJson.EffectEntries.First().ShortEffect;
 

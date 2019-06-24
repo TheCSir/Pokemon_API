@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HttpHelpers.ResponceServices
+namespace HttpHelpers.ResponseServices
 {
-    public static class GetResponce
+    public static class GetResponse
     {
         public static HttpResponseMessage GetResponseString(Uri inputUri)
         {

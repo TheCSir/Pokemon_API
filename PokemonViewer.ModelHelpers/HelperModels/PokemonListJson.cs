@@ -4,25 +4,19 @@ using Newtonsoft.Json;
 
 namespace PokemonViewer.ModelHelpers.HelperModels
 {
-    public class PokemonListJson : IHelperModel
+    public class PokemonListJson : HelperModel
     {
-        [JsonProperty("count")]
-        public int Count { get; set; }
+        [JsonProperty("count")] public int Count { get; set; }
 
-        [JsonProperty("next")]
-        public Uri Next { get; set; }
+        [JsonProperty("next")] public Uri Next { get; set; }
 
-        [JsonProperty("previous")]
-        public object Previous { get; set; }
+        [JsonProperty("previous")] public object Previous { get; set; }
 
-        [JsonProperty("results")]
-        public List<Result> Results { get; set; }
+        [JsonProperty("results")] public List<Result> Results { get; set; }
     }
 
-    public partial class Result
+    public class Result
     {
-        [JsonProperty("url")]
-        public Uri Url { get; set; }
+        [JsonProperty("url")] public Uri Url { get; set; }
     }
 }
-

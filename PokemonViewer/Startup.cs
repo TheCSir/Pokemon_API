@@ -3,8 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PokemonViewer.Services.ModelPopulator.Instances;
-using PokemonViewer.Services.ModelPopulators.Interfaces;
-
+using PokemonViewer.Services.ModelPopulator.Interfaces;
 
 namespace PokemonViewer
 {
