@@ -42,6 +42,7 @@ namespace PokemonViewer.Controllers
 
             if (_simplifiedPokemon.GetTotal() == 0) return View("Error");
 
+            
             ViewBag.ErrorMessage = "Can't seem to find pokemons you are looking for";
             return View("ServerError");
 
