@@ -7,8 +7,10 @@ namespace PokemonViewer.Services.ModelPopulators.Interfaces
 {
     public interface ISimplifiedPokemonServer
     {
-        void SetPokemons(int offset);
+        void SetPokemons(int offset, int limit);
 
         List<SimplifiedPokemon> GetPokemons();
+
+        int GetTotal();
     }
 }

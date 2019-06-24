@@ -29,16 +29,17 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
 
         public Pokemon MapModels(PokemonJson jPokemon)
         {
-            Pokemon pokemon = new Pokemon {Id = jPokemon.Id, Name = jPokemon.Name};
-
-
-            if (pokemon.Name == null)
+            if (jPokemon == null)
                 return null;
-
-            pokemon.Weight = jPokemon.Height;
-            pokemon.Height = jPokemon.Height;
-            pokemon.Order = jPokemon.Order;
-            pokemon.BaseExperience = jPokemon.BaseExperience;
+            Pokemon pokemon = new Pokemon
+            {
+                Id = jPokemon.Id,
+                Name = jPokemon.Name,
+                Weight = jPokemon.Height,
+                Height = jPokemon.Height,
+                Order = jPokemon.Order,
+                BaseExperience = jPokemon.BaseExperience
+            };
             MapStats(pokemon, jPokemon);
             pokemon.Image = jPokemon.Sprites.FrontDefault;
             pokemon.Types = MapTypes(jPokemon);

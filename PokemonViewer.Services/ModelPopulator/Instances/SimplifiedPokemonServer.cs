@@ -11,6 +11,7 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
     public class SimplifiedPokemonServer : ISimplifiedPokemonServer
     {
         private List<SimplifiedPokemon> _pokemonListModel = new List<SimplifiedPokemon>();
+        private int? _totalCount;
 
         public List<SimplifiedPokemon> GetPokemons()
         {
@@ -18,16 +19,19 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
             return _pokemonListModel;
         }
 
-        public void SetPokemons(int offset)
+        public void SetPokemons(int offset, int limit)
         {
             var simplifiedPokemonJson = new SimplifiedPokemonJson();
             var newPokemonList = new PokemonListJson();
             List<Uri> uriList = new List<Uri>();
 
-            Uri uri = new Uri("https://pokeapi.co/api/v2/pokemon?offset=" + offset + "&limit=10");
+            Uri uri = new Uri("https://pokeapi.co/api/v2/pokemon?offset=" + offset + "&limit="+limit);
 
 
             newPokemonList = (PokemonListJson)MapToObject.MapJsonToModel(uri, newPokemonList);
+
+            if (newPokemonList == null) return;
+            _totalCount = newPokemonList.Count;
 
             foreach (var result in newPokemonList.Results)
             {
@@ -40,6 +44,7 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
             {
                 _pokemonListModel.Add(GeneratePokemon(tempUri));
             }
+
         }
 
         public SimplifiedPokemon GeneratePokemon(Uri pokemonUri)
@@ -64,6 +69,14 @@ namespace PokemonViewer.Services.ModelPopulator.Instances
             temPokemon.Image = jPokemon.Sprites.FrontDefault;
 
             return temPokemon;
+        }
+
+        public int GetTotal()
+        {
+            if (_totalCount.HasValue)
+                return (int) _totalCount;
+            else
+                return 0;
         }
     }
 }

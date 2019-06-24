@@ -12,16 +12,27 @@ namespace PokemonViewer.ModelHelpers.HelperFunctions
         {
             var response = GetResponce.GetResponseString(inputUri);
 
-            if (inputModel.GetType() == typeof(PokemonJson))
-                inputModel = JsonConvert.DeserializeObject<PokemonJson>(response.Content.ReadAsStringAsync().Result);
-            else if (inputModel.GetType() == typeof(AbilityJson))
-                inputModel = JsonConvert.DeserializeObject<AbilityJson>(response.Content.ReadAsStringAsync().Result);
-            else if (inputModel.GetType() == typeof(PokemonListJson))
-                inputModel = JsonConvert.DeserializeObject<PokemonListJson>(response.Content.ReadAsStringAsync().Result);
-            else if (inputModel.GetType() == typeof(SimplifiedPokemonJson))
-                inputModel = JsonConvert.DeserializeObject<SimplifiedPokemonJson>(response.Content.ReadAsStringAsync().Result);
+            try
+            {
+                if (inputModel.GetType() == typeof(PokemonJson))
+                    inputModel = JsonConvert.DeserializeObject<PokemonJson>(response.Content.ReadAsStringAsync().Result);
+                else if (inputModel.GetType() == typeof(AbilityJson))
+                    inputModel = JsonConvert.DeserializeObject<AbilityJson>(response.Content.ReadAsStringAsync().Result);
+                else if (inputModel.GetType() == typeof(PokemonListJson))
+                    inputModel = JsonConvert.DeserializeObject<PokemonListJson>(response.Content.ReadAsStringAsync().Result);
+                else if (inputModel.GetType() == typeof(SimplifiedPokemonJson))
+                    inputModel = JsonConvert.DeserializeObject<SimplifiedPokemonJson>(response.Content.ReadAsStringAsync().Result);
+                return inputModel;
 
-            return inputModel;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return null;
+            }
+            
+
+            
         }
     }
 }

@@ -8,9 +8,23 @@ namespace PokemonViewer.Controllers
 {
     public class ErrorController : Controller
     {
-        public IActionResult Index()
+        [Route("Error/{statusCode}")]
+        public IActionResult HttpStatusCodeHandler(int statusCode)
         {
-            return View();
+            switch (statusCode)
+            {
+                case 404:
+                    ViewBag.ErrorMessage = "Can't seem to find what you are looking for";
+                    break;
+            }
+            return View("ServerError");
+        }
+
+        [Route("Error")]
+        public IActionResult ServerError()
+        {
+            ViewBag.ErrorMessage = "We have some internal conflicts among pokemon right now ";
+            return View("ServerError");
         }
     }
 }

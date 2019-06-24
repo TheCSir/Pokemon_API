@@ -1,6 +1,5 @@
 ﻿@{
-
-    ViewBag.Title = "Api Error Page";
+    ViewBag.Title = "Server Error";
 }
 
 <div class="jumbotron text-center">
@@ -13,7 +12,12 @@
             <div class="row">
                 <div class="col">
                     <h4 class="alert-heading">Oops! An error occurred</h4>
-                    <p>We are having trouble accessing API services right now.</p>
+                    <p>@ViewBag.ErrorMessage</p>
+                    <p class="mb-0">
+                        Click &nbsp;&nbsp;<a class="btn btn-outline-secondary" asp-action="Index" asp-controller="home">
+                            Here
+                        </a>&nbsp;&nbsp; to go to home page.
+                    </p>
                 </div>
             </div>
             
