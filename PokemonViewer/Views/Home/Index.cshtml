@@ -8,70 +8,76 @@
 <div class="jumbotron text-center">
     <h1>Pokemon List</h1>
 </div>
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        @if (ViewBag.IsPrevious)
-        {
-            <li class="page-item">
-                <a class="page-link"
-                   asp-controller="Home"
-                   asp-action="Index"
-                   asp-route-id="@(ViewBag.ActivePage - 1)">
-                    Previous
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-            </li>
-        }
-        <li class="page-item active">
-            <a class="page-link" href="#">@ViewBag.ActivePage</a>
-        </li>
-        @if (ViewBag.IsNext)
-        {
-            <li class="page-item">
-                <a class="page-link"
-                   asp-controller="Home"
-                   asp-action="Index"
-                   asp-route-id="@(ViewBag.ActivePage + 1)">
-                    Next
-                </a>
-            </li>
-        }
-        else
-        {
-            <li class="page-item disabled">
-                <a class="page-link">Next</a>
-            </li>
-        }
-    </ul>
+<nav>
+    <div class="row">
+        <div class="container col-sm col-md-9">
+            <ul class="pagination">
+                @if (ViewBag.IsPrevious)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                           asp-controller="Home"
+                           asp-action="Index"
+                           asp-route-id="@(ViewBag.ActivePage - 1)">
+                            Previous
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                }
+                <li class="page-item active">
+                    <a class="page-link" href="#">@ViewBag.ActivePage</a>
+                </li>
+                @if (ViewBag.IsNext)
+                {
+                    <li class="page-item">
+                        <a class="page-link"
+                           asp-controller="Home"
+                           asp-action="Index"
+                           asp-route-id="@(ViewBag.ActivePage + 1)">
+                            Next
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item disabled">
+                        <a class="page-link">Next</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
 </nav>
-
 @foreach (var pokemon in Model)
 {
     <div class="container-fluid">
-        <a class="item-link" asp-controller="Home"
-           asp-action="Details"
-           asp-route-id="@pokemon.Id">
-            <div class="row border border-primary rounded m-2 item-link">
-                <div class="col-sm m-3 text-center">
-                    <img src="@pokemon.Image" class="img-thumbnail"/>
-                </div>
-                <div class="col-sm-12 col-md-9 m-3">
-                    <h4 class="text-uppercase text-center">@pokemon.Name</h4>
-                    <hr>
-                    <div class="row text-center border rounded border-dark">
-                        <div class="col-sm border border-dark"><span class="font-weight-bold">ID</span> : @pokemon.Id</div>
-                        <div class="col-sm "><span class="font-weight-bold text-secondary">Order Of Sorting</span> : @pokemon.Order</div>
-                        <div class="col-sm border border-dark"><span class="font-weight-bold text-secondary">Base XP</span> : @pokemon.Order</div>
-                    </div>
+        <div class="row justify-content-md-center">
+            <div class="col-sm col-md-10">
+                <a class="item-link" asp-controller="Home"
+                   asp-action="Details"
+                   asp-route-id="@pokemon.Id">
+                    <div class="row border border-primary rounded m-2 item-link shadow p-3 mb-5 bg-white rounded">
+                        <div class="col-sm m-3 text-center">
+                            <img src="@pokemon.Image" class="img-thumbnail"/>
+                        </div>
+                        <div class="col-sm col-md-9 m-3">
+                            <h4 class="text-uppercase text-center">@pokemon.Name</h4>
+                            <hr>
+                            <div class="row text-center border rounded border-dark">
+                                <div class="col-sm border border-dark"><span class="font-weight-bold">ID</span> : @pokemon.Id</div>
+                                <div class="col-sm border border-dark"><span class="font-weight-bold text-secondary">Order Of Sorting</span> : @pokemon.Order</div>
+                            </div>
 
-                    <br>
-                </div>
+                            <br>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </a>
+        </div>
     </div>
 }

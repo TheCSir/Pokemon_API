@@ -19,7 +19,7 @@ namespace HttpHelpers.ResponceServices
                     response.EnsureSuccessStatusCode();
                     return response;
                 }
-                catch (HttpRequestException e)
+                catch (Exception e)
                 {
                     Console.WriteLine(e);
                     return null;

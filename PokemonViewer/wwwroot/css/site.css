@@ -1,4 +1,6 @@
-﻿.item-link {
+﻿
+
+.item-link {
     color: black;
     text-decoration: solid
 }
@@ -11,14 +13,15 @@
     text-decoration: none;
 }
 
-.details-container {
+.details-container{
     padding-bottom: 20px;
     padding-top: 20px;
 }
+.details-container-type {
+    padding-bottom: 20px;
+}
 
 .data-row {
-    border: 1px solid;
-    border-radius: 5px;
     font-size: larger;
     padding-bottom: 5px;
     padding-top: 5px;
@@ -27,6 +30,12 @@
 
 .data-item { font-size: large; }
 
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .data-item {
+        text-align: center;
+    }
+}
+
 .data-description { font-size: medium; }
 
-.first-data { border-right: 1px solid; }
