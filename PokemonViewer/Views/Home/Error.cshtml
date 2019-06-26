@@ -3,14 +3,19 @@
     ViewBag.Title = "Api Error Page";
 }
 
+@* View header *@
 <div class="jumbotron text-center">
     <h1>Error Page</h1>
 </div>
+@* Error card *@
 <div class="alert alert-danger" role="alert">
     <div class="row">
+        @* Error image div *@
         <div class="col-4">
             <img class="img-fluid" alt="Responsive image" src="~/Images/ErrorPikachu.png"/>
         </div>
+
+        @* Error message div *@
         <div class="col d-flex align-items-center">
             <div class="row">
                 <div class="col">
@@ -18,7 +23,6 @@
                     <p>We are having trouble accessing API services right now.</p>
                 </div>
             </div>
-
         </div>
     </div>
     <hr>

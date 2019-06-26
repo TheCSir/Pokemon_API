@@ -5,13 +5,19 @@
     ViewBag.Title = "Pokemon List";
 }
 
+@* View header *@
 <div class="jumbotron text-center">
     <h1>Pokemon List</h1>
 </div>
+
+@* View Navigation *@
 <nav>
     <div class="row">
         <div class="container col-sm col-md-9">
+            @* pagination div *@
             <ul class="pagination">
+
+                @* If no first page *@
                 @if (ViewBag.IsPrevious)
                 {
                     <li class="page-item">
@@ -30,8 +36,10 @@
                     </li>
                 }
                 <li class="page-item active">
-                    <a class="page-link" href="#">@(ViewBag.ActivePage+1)</a>
+                    <a class="page-link" href="#">@(ViewBag.ActivePage + 1)</a>
                 </li>
+
+                @* If last page *@
                 @if (ViewBag.IsNext)
                 {
                     <li class="page-item">
@@ -53,18 +61,27 @@
         </div>
     </div>
 </nav>
+
+@* List of pokemon cards *@
 @foreach (var pokemon in Model)
 {
     <div class="container-fluid">
         <div class="row justify-content-md-center">
             <div class="col-sm col-md-10">
+
+                @* redirection asp tag helper *@
                 <a class="item-link" asp-controller="Home"
                    asp-action="Details"
                    asp-route-id="@pokemon.Id">
+
                     <div class="row border border-primary rounded m-2 item-link shadow p-3 mb-5 bg-white rounded">
+
+                        @* Image div *@
                         <div class="col-sm text-center">
                             <img src="@pokemon.Image" class="img-thumbnail"/>
                         </div>
+
+                        @* Details divs *@
                         <div class="col-sm col-md-9 m-3">
                             <h4 class="text-uppercase text-center">@pokemon.Name</h4>
                             <hr>
@@ -72,7 +89,6 @@
                                 <div class="col-sm border border-dark"><span class="font-weight-bold">ID</span> : @pokemon.Id</div>
                                 <div class="col-sm border border-dark"><span class="font-weight-bold text-secondary">Order Of Sorting</span> : @pokemon.Order</div>
                             </div>
-
                             <br>
                         </div>
                     </div>

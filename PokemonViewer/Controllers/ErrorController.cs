@@ -2,8 +2,12 @@
 
 namespace PokemonViewer.Controllers
 {
+    /// <summary>
+    /// General Error controller class
+    /// </summary>
     public class ErrorController : Controller
     {
+        // Resource not found Error
         [Route("Error/{statusCode}")]
         public IActionResult HttpStatusCodeHandler(int statusCode)
         {
@@ -17,6 +21,7 @@ namespace PokemonViewer.Controllers
             return View("ServerError");
         }
 
+        //Unhandled Exception Error
         [Route("Error")]
         public IActionResult ServerError()
         {

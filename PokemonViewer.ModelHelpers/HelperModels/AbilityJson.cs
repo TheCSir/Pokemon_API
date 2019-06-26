@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace PokemonViewer.ModelHelpers.HelperModels
 {
-    public partial class AbilityJson : HelperModel
+    public class AbilityJson : HelperModel
     {
-
         [JsonProperty("effect_entries")] public List<EffectEntry> EffectEntries { get; set; }
 
 
@@ -14,10 +12,9 @@ namespace PokemonViewer.ModelHelpers.HelperModels
 
 
         [JsonProperty("name")] public string Name { get; set; }
-
     }
 
-    public partial class EffectEntry
+    public class EffectEntry
     {
         [JsonProperty("effect")] public string Effect { get; set; }
 
@@ -25,4 +22,3 @@ namespace PokemonViewer.ModelHelpers.HelperModels
         [JsonProperty("short_effect")] public string ShortEffect { get; set; }
     }
 }
-

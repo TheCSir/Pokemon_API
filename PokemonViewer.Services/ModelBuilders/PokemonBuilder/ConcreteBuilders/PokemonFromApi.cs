@@ -5,80 +5,78 @@ using PokemonViewer.Domain.Models;
 using PokemonViewer.ModelHelpers.HelperFunctions;
 using PokemonViewer.ModelHelpers.HelperModels;
 
-namespace PokemonViewer.Repository
+namespace PokemonViewer.Services.ModelBuilders.PokemonBuilder.ConcreteBuilders
 {
-    public class PokemonList: IRepository
+    public class PokemonFromApi : IPokemonBuilder
     {
-        private List<Pokemon> _pokemonList;
+        // current pokemon
+        private Pokemon _pokemonModel;
 
-        public List<Pokemon> GetAll()
-        {
-            return _pokemonList;
-        }
-
-        public Pokemon GetSelected(int id)
-        {
-            return _pokemonList.FirstOrDefault(p => p.Id == id);
-        }
-
-        public void SetList(int size)
-        {
-            _pokemonList = new List<Pokemon>();
-            List<Uri> pokemonUriList = GetPokemonUri(size);
-            foreach (var uri in pokemonUriList)
-            {
-                _pokemonList.Add(GeneratePokemon(uri));
-            }
-
-        }
-
-        public List<Uri> GetPokemonUri(int i)
-        {
-            var newPokemonList = new PokemonListJson();
-            var tempUri = new Uri("https://pokeapi.co/api/v2/pokemon?offset=" + i + "&limit=20");
-            List<Uri> uriList = new List<Uri>();
-
-            newPokemonList = (PokemonListJson)MapToObject.MapJsonToModel(tempUri, newPokemonList);
-
-            foreach (var result in newPokemonList.Results)
-            {
-                uriList.Add(result.Url);
-            }
-
-            return uriList;
-        }
-
-        public Pokemon GeneratePokemon(Uri pokemonUri)
+        public void SetPokemon(int id)
         {
             var tempPokemonJson = new PokemonJson();
-            var newPokemon = new Pokemon();
+            var uri = new Uri("https://pokeapi.co/api/v2/pokemon/" + id + "/");
 
-            tempPokemonJson = (PokemonJson)MapToObject.MapJsonToModel(pokemonUri, tempPokemonJson);
-            MapModels(newPokemon, tempPokemonJson);
-            return newPokemon;
+            tempPokemonJson = (PokemonJson) MapToObject.MapJsonToModel(uri, tempPokemonJson);
+            _pokemonModel = MapModels(tempPokemonJson);
         }
 
-        public bool MapModels(Pokemon pokemon, PokemonJson jPokemon)
+        public Pokemon GetPokemon()
         {
-            pokemon.Id = jPokemon.Id;
-            pokemon.Name = jPokemon.Name;
-            pokemon.Weight = jPokemon.Height;
-            pokemon.Height = jPokemon.Height;
-            pokemon.Order = jPokemon.Order;
-            pokemon.BaseExperience = jPokemon.BaseExperience;
-            MapStats(pokemon, jPokemon);
-            pokemon.Image = jPokemon.Sprites.FrontDefault;
-            pokemon.Types = MapTypes(jPokemon);
-            pokemon.Abilities = MapAbility(jPokemon);
-            return true;
+            return _pokemonModel;
         }
 
-        public Dictionary<string, string> MapAbility(PokemonJson jPokemon)
+        /// <summary>
+        ///     This method will match each attribute form PokemonJson to Pokemon model
+        /// </summary>
+        /// <param name="jPokemon"> generated PokemonJson model </param>
+        /// <returns>
+        ///     A SimplifiedPokemon or null of no data form in input model
+        /// </returns>
+        private Pokemon MapModels(PokemonJson jPokemon)
+        {
+            // if input is null
+            if (jPokemon == null)
+                return null;
+
+            var pokemon = new Pokemon
+            {
+                Id = jPokemon.Id,
+                Name = jPokemon.Name,
+                Weight = jPokemon.Height,
+                Height = jPokemon.Height,
+                Order = jPokemon.Order,
+                BaseExperience = jPokemon.BaseExperience,
+                Image = jPokemon.Sprites.FrontDefault
+            };
+            // call MapStats method to map stat data
+            MapStats(pokemon, jPokemon);
+            // call MapTypes method ot map Type data
+            pokemon.Types = MapTypes(jPokemon);
+            // call MapAbilities method to map Ability data
+            pokemon.Abilities = MapAbility(jPokemon);
+
+            return pokemon;
+        }
+
+        /// <summary>
+        ///     This helper function will get Ability data of helper model jPokemon
+        /// </summary>
+        /// <param name="jPokemon">generated PokemonJson model</param>
+        /// <returns>
+        ///     Ability data dictionary
+        /// </returns>
+        private Dictionary<string, string> MapAbility(PokemonJson jPokemon)
         {
             var tempAbilityDictionary = new Dictionary<string, string>();
+
+            // loop-through Ability model
             foreach (var ability in jPokemon.Abilities)
             {
+                // get ability uri for Api endpoint
                 var abilityUri = ability.AbilityAbility.Url;
+
+                // get ability data from ability uri my calling GetAbilityTuple helper method
                 tempAbilityDictionary.Add(GetAbilityTuple(abilityUri).Item1,
                     GetAbilityTuple(abilityUri).Item2);
             }
@@ -86,21 +84,37 @@ namespace PokemonViewer.Repository
             return tempAbilityDictionary;
         }
 
-        public Tuple<string, string> GetAbilityTuple(Uri abilityUri)
+        /// <summary>
+        ///     This helper function get ability data from given api endpoint
+        /// </summary>
+        /// <param name="abilityUri"> Api endpoint of ability data</param>
+        /// <returns>
+        ///     tuple with (ability name, ability description)
+        /// </returns>
+        private Tuple<string, string> GetAbilityTuple(Uri abilityUri)
         {
             var tempAbilityJson = new AbilityJson();
-            tempAbilityJson = (AbilityJson)MapToObject.MapJsonToModel(abilityUri, tempAbilityJson);
+            // get Json helper model of AbilityJson from uri
+            tempAbilityJson = (AbilityJson) MapToObject.MapJsonToModel(abilityUri, tempAbilityJson);
+            // get values
             var name = tempAbilityJson.Name;
             var desc = tempAbilityJson.EffectEntries.First().ShortEffect;
 
             return Tuple.Create(name, desc);
         }
 
-        public void MapStats(Pokemon pokemon, PokemonJson jPokemon)
+        /// <summary>
+        ///     This helper method will match get required stat attribute form PokemonJson to SimplifiedPokemon
+        /// </summary>
+        /// <param name="pokemon">input Pokemon object </param>
+        /// <param name="jPokemon">input helper pokemon object </param>
+        private void MapStats(Pokemon pokemon, PokemonJson jPokemon)
         {
             foreach (var stat in jPokemon.Stats)
                 switch (stat.StatStat.Name)
                 {
+                    // the switch status conditions are from Pokemon Api documentation 
+                    // from url https://pokeapi.co/docs/v2.html#stats
                     case "speed":
                         pokemon.StatSpeed = stat.BaseStat;
                         break;
@@ -122,7 +136,17 @@ namespace PokemonViewer.Repository
                 }
         }
 
-        public Dictionary<string, string> MapTypes(PokemonJson jPokemon)
+        /// <summary>
+        ///     This helper method will get type data from helper pokemon model
+        ///     then create a dictionary according to it.
+        ///     The dictionary contains Type name and color code for the type
+        ///     The color codes are from the web reference https://bulbapedia.bulbagarden.net/wiki/Type
+        /// </summary>
+        /// <param name="jPokemon"> input helper pokemon object </param>
+        /// <returns>
+        ///     A dictionary with (String:Type name, Hexadecimal:Type color code)
+        /// </returns>
+        private Dictionary<string, string> MapTypes(PokemonJson jPokemon)
         {
             var tempTypes = new Dictionary<string, string>();
 

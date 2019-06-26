@@ -1,14 +1,33 @@
-﻿.item-link {
+﻿/*
+* ============  of Index page css =====================
+*/
+
+/*
+* — Item link card css —
+*/
+.item-link {
     color: black;
     text-decoration: solid
 }
-
-.back-btn { margin-bottom: 10px; }
 
 .item-link:hover {
     background-color: #cdf9ff;
     text-decoration: none;
 }
+
+/*
+* — Back button css —
+*/
+
+.back-btn { margin-bottom: 10px; }
+
+/*
+* ============ End of Index page css ==================
+*/
+
+/*
+* — details card css —
+*/
 
 .details-container {
     padding-bottom: 20px;
@@ -24,11 +43,14 @@
     text-align: left;
 }
 
+.data-description { font-size: medium; }
+
 .data-item { font-size: large; }
 
+/*
+* — Mobile view css —
+*/
+
 @media only screen and (max-width: 768px) {
-    /* For mobile phones: */
     .data-item { text-align: center; }
 }
-
-.data-description { font-size: medium; }
