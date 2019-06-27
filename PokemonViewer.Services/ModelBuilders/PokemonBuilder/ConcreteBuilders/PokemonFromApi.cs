@@ -108,7 +108,7 @@ namespace PokemonViewer.Services.ModelBuilders.PokemonBuilder.ConcreteBuilders
         /// </summary>
         /// <param name="pokemon">input Pokemon object </param>
         /// <param name="jPokemon">input helper pokemon object </param>
-        private void MapStats(Pokemon pokemon, PokemonJson jPokemon)
+        private static void MapStats(Pokemon pokemon, PokemonJson jPokemon)
         {
             foreach (var stat in jPokemon.Stats)
                 switch (stat.StatStat.Name)

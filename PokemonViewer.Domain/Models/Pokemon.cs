@@ -32,6 +32,7 @@ namespace PokemonViewer.Domain.Models
         public Dictionary<string, string> Types { get; set; }
 
         public Dictionary<string, string> Abilities { get; set; }
+
         public Uri Image { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace PokemonViewer.Controllers
 
             // validate and set page size
             currentResultSize = isResultFound && currentResultSize > 0 ? currentResultSize : DefaultSize;
+
             // set offset by input id
             var currentIndex = id ?? 0;
             var currentOffset = currentIndex * currentResultSize;
@@ -44,12 +45,12 @@ namespace PokemonViewer.Controllers
             // validate results
             // 1. check if list is not empty
             // 2. check if user input is in valid range
-            if (_simplifiedPokemon.GetTotal() != 0 &&
-                currentIndex >= 0 &&
+            if (_simplifiedPokemon.GetTotal() != 0 && currentIndex >= 0 &&
                 currentIndex <= CalcMaxPage(_simplifiedPokemon.GetTotal()))
             {
                 // set model for view
                 var model = _simplifiedPokemon.GetPokemons();
+
                 // set relevant view data 
                 ViewBag.ActivePage = currentIndex;
                 ViewBag.IsNext = CalcIsNext();
@@ -59,7 +60,8 @@ namespace PokemonViewer.Controllers
             }
 
             // if model failed to populate ( error with Api services/ connection)
-            if (_simplifiedPokemon.GetTotal() == 0) return View("Error");
+            if (_simplifiedPokemon.GetTotal() == 0)
+                return View("Error");
 
             // if user validations fail 
             ViewBag.ErrorMessage = "Can't seem to find pokemons you are looking for";
