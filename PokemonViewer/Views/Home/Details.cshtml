@@ -1,5 +1,112 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model PokemonViewer.Domain.Models.Pokemon
+
 @{
+
+    ViewBag.Title = "Pokemon Details";
 }
+
+@* View header *@
+<div class="jumbotron text-center">
+    <h1>Pokemon Details</h1>
+</div>
+
+@* View Navigation *@
+<nav>
+    <div class="row">
+        <div class="container col-sm col-md-7">
+            <a class="btn btn-outline-secondary back-btn"
+               onclick="history.back();">
+                Go Back
+            </a>
+        </div>
+    </div>
+</nav>
+
+@* Pokemon details card *@
+<div class="container-fluid">
+    <div class="text-center row ">
+        <div class="container col-sm col-md-7 border-dark border rounded shadow p-3 mb-5 bg-white rounded">
+            @* Image div *@
+            <div class="row">
+                <div class="col details-container">
+                    <img class="rounded-circle border border-secondary" src="@Model.Image"/>
+                </div>
+            </div>
+
+            @* Pokemon Name div *@
+            <div class="row">
+                <div class="col details-container">
+                    <h3 class="text-uppercase">@Model.Name</h3>
+                </div>
+            </div>
+
+            @* Pokemon Types div *@
+            <div class="row details-container-type">
+                <div class="col-2 "></div>
+                @foreach (var type in Model.Types)
+                {
+                    @:<div class="col border border-dark rounded m-2 data-description font-weight-bold" style="background-color: @type.Value">
+                    @type.Key
+                    @:</div>
+                }
+                <div class="col-2"></div>
+            </div>
+
+            @* Pokemon Details divs *@
+            <div class="row m-2 data-row">
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Base Xp</span> : @Model.BaseExperience
+                </div>
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Hp</span> : @Model.StatHp
+                </div>
+            </div>
+            <div class="row m-2 data-row">
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Height</span> : @Model.Height ( Decimeters )
+                </div>
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Weight</span> : @Model.Weight (Hectograms)
+                </div>
+            </div>
+            <div class="row m-2 data-row">
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Speed</span> : @Model.StatSpeed
+                </div>
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Order of sorting</span> : @Model.Order
+                </div>
+            </div>
+            <div class="row m-2 data-row">
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Attack</span> : @Model.StatAttack
+                </div>
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Special Attack</span> : @Model.StatSpecialAttack
+                </div>
+            </div>
+            <div class="row m-2 data-row">
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Defence</span> : @Model.StatDefence
+                </div>
+                <div class="col-sm border border-dark rounded data-item">
+                    <span class="font-weight-bold">Special Defence</span> : @Model.StatSpecialDefence
+                </div>
+            </div>
+            <div class="row m-2 data-row text-center">
+                <div class="col-sm border border-dark ">
+                    <span class="font-weight-bold">Abilities </span><hr/>
+                    @foreach (var ability in Model.Abilities)
+                    {
+                        @:<div class="col-sm data-description"><span class="text-uppercase font-weight-bold">
+                        @ability.Key
+                        @:</span> :
+                        @ability.Value
+                        @:</div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

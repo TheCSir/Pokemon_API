@@ -1,16 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace PokemonViewer.Controllers
 {
+    /// <summary>
+    /// General Error controller class
+    /// </summary>
     public class ErrorController : Controller
     {
-        public IActionResult Index()
+        // Resource not found Error
+        [Route("Error/{statusCode}")]
+        public IActionResult HttpStatusCodeHandler(int statusCode)
         {
-            return View();
+            switch (statusCode)
+            {
+                case 404:
+                    ViewBag.ErrorMessage = "Can't seem to find what you are looking for";
+                    break;
+            }
+
+            return View("ServerError");
+        }
+
+        //Unhandled Exception Error
+        [Route("Error")]
+        public IActionResult ServerError()
+        {
+            ViewBag.ErrorMessage = "We have some internal conflicts among pokemon right now ";
+            return View("ServerError");
         }
     }
 }

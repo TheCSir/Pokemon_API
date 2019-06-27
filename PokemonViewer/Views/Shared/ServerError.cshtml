@@ -1,18 +1,18 @@
 ﻿@{
-
-    ViewBag.Title = "Api Error Page";
+    ViewBag.Title = "Server Error";
 }
 
 @* View header *@
 <div class="jumbotron text-center">
     <h1>Error Page</h1>
 </div>
+
 @* Error card *@
 <div class="alert alert-danger" role="alert">
     <div class="row">
         @* Error image div *@
         <div class="col-4">
-            <img class="img-fluid" alt="Responsive image" src="~/Images/ErrorPikachu.png"/>
+            <img class="img-fluid" alt="Responsive image" src="~/Images/ErrorPikachu.png" />
         </div>
 
         @* Error message div *@
@@ -20,9 +20,18 @@
             <div class="row">
                 <div class="col">
                     <h4 class="alert-heading">Oops! An error occurred</h4>
-                    <p>We are having trouble accessing API services right now.</p>
+                    <p>@ViewBag.ErrorMessage</p>
+
+                    @* Back button *@
+                    <p class="mb-0">
+                        Click &nbsp;&nbsp;
+                        <a class="btn btn-outline-secondary" asp-action="Index" asp-controller="home" asp-route-id="0">
+                            Here
+                        </a>&nbsp;&nbsp; to go to home page.
+                    </p>
                 </div>
             </div>
+
         </div>
     </div>
     <hr>
